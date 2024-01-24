@@ -10,14 +10,14 @@ namespace TwoDmensionalArray
     {
         static void Main(string[] args)
         {
-            twoDmensionalArray array = new twoDmensionalArray(false, 4, 5);
+            twoDmensionalArray array = new twoDmensionalArray(true, 4, 5);
             Console.WriteLine("Среднее занчение: ");
             Console.WriteLine(array.getAverageTwoDimensionalArrayValue());
             array.getTwoDimensionalArrayAsSanke();
             Console.WriteLine("Вывод змейкой: ");
             array.printTwoDimensionalArray();
             Console.WriteLine();
-            array.Create(true, 3, 3);
+            array.Create(flase, 3, 3);
             Console.WriteLine("Среднее занчение: ");
             Console.WriteLine(array.getAverageTwoDimensionalArrayValue());
             array.getTwoDimensionalArrayAsSanke();
@@ -29,20 +29,20 @@ namespace TwoDmensionalArray
     class twoDmensionalArray
     {
         private int[,] array;
-        public twoDmensionalArray(bool isRandom, int arrayLength, int arrayWidth)
+        public twoDmensionalArray(bool isNotRandom, int arrayLength, int arrayWidth)
         {
-            if (isRandom)
+            if (isNotRandom)
+            {
+                array = new int[arrayWidth, arrayLength];
+                GetTwoDimensionalArray(array);
+            }
+            else
             {
                 Random random = new Random();
                 int ArrayLength = random.Next(3, 10);
                 int ArrayWidth = random.Next(3, 10);
                 array = new int[ArrayWidth, ArrayLength];
                 GetTwoDimensionalArrayRandom(array);
-            }
-            else
-            {
-                array = new int[arrayWidth, arrayLength];
-                GetTwoDimensionalArray(array);
             }
         }
         private int[,] GetTwoDimensionalArray(int[,] array)
@@ -70,18 +70,18 @@ namespace TwoDmensionalArray
         }
         public void Create(bool isRandom, int arrayLength, int arrayWidth)
         {
-            if (isRandom)
+            if (isNotRandom)
+            {
+                array = new int[arrayWidth, arrayLength];
+                GetTwoDimensionalArray(array);
+            }
+            else
             {
                 Random random = new Random();
                 int ArrayLength = random.Next(3, 10);
                 int ArrayWidth = random.Next(3, 10);
                 array = new int[ArrayWidth, ArrayLength];
                 GetTwoDimensionalArrayRandom(array);
-            }
-            else
-            {
-                array = new int[arrayWidth, arrayLength];
-                GetTwoDimensionalArray(array);
             }
         }
         public int getAverageTwoDimensionalArrayValue()
