@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OneDimensionalArray
 {
@@ -12,10 +8,13 @@ namespace OneDimensionalArray
         {
             oneDimensionalArray array = new oneDimensionalArray(true, 10);
             array.printArray();
+            Console.WriteLine("Среднее значение: ");
             Console.WriteLine(array.getAverageArrayValue());
+            Console.WriteLine("Удаление элементов, больших 100 по модулю: ");
             array.deleteBiggerThan100();
             array.printArray();
-            array.Create(true, 10);
+            array.Create(false, 10);
+            Console.WriteLine("Массив, без повторяющихся элементов: ");
             array.deleteRepeating();
             array.printArray();
         }
@@ -24,18 +23,18 @@ namespace OneDimensionalArray
     {
         private bool isRandom = false;
         private int[] array;
-        public oneDimensionalArray(bool isRandom, int length)
+        public oneDimensionalArray(bool isNotRandom, int length)
         {
-            if (isRandom)
+            if (isNotRandom)
+            {
+                array = new int[length];
+                getArray(array);
+            }
+            else
             {
                 Random random = new Random();
                 array = new int[random.Next(3, 10)];
                 getRandomArray(array);
-            }
-            else
-            {
-                array = new int[length];
-                getArray(array);
             }
         }
         private int[] getRandomArray(int[] array)
@@ -58,16 +57,16 @@ namespace OneDimensionalArray
         }
         public void Create(bool isRandom, int length)
         {
-            if (isRandom)
+            if (isNotRandom)
+            {
+                array = new int[length];
+                getArray(array);
+            }
+            else
             {
                 Random random = new Random();
                 array = new int[random.Next(3, 10)];
                 getRandomArray(array);
-            }
-            else
-            {
-                array = new int[length];
-                getArray(array);
             }
         }
         public double getAverageArrayValue()
