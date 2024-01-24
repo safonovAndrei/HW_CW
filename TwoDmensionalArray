@@ -1,0 +1,133 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TwoDmensionalArray
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            twoDmensionalArray array = new twoDmensionalArray(false, 4, 5);
+            Console.WriteLine("Среднее занчение: ");
+            Console.WriteLine(array.getAverageTwoDimensionalArrayValue());
+            array.getTwoDimensionalArrayAsSanke();
+            Console.WriteLine("Вывод змейкой: ");
+            array.printTwoDimensionalArray();
+            Console.WriteLine();
+            array.Create(true, 3, 3);
+            Console.WriteLine("Среднее занчение: ");
+            Console.WriteLine(array.getAverageTwoDimensionalArrayValue());
+            array.getTwoDimensionalArrayAsSanke();
+            Console.WriteLine("Вывод змейкой: ");
+            array.printTwoDimensionalArray();
+
+        }
+    }
+    class twoDmensionalArray
+    {
+        private int[,] array;
+        public twoDmensionalArray(bool isRandom, int arrayLength, int arrayWidth)
+        {
+            if (isRandom)
+            {
+                Random random = new Random();
+                int ArrayLength = random.Next(3, 10);
+                int ArrayWidth = random.Next(3, 10);
+                array = new int[ArrayWidth, ArrayLength];
+                GetTwoDimensionalArrayRandom(array);
+            }
+            else
+            {
+                array = new int[arrayWidth, arrayLength];
+                GetTwoDimensionalArray(array);
+            }
+        }
+        private int[,] GetTwoDimensionalArray(int[,] array)
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    array[i, j] = int.Parse(Console.ReadLine());
+                }
+            }
+            return array;
+        }
+        private int[,] GetTwoDimensionalArrayRandom(int[,] array)
+        {
+            Random random = new Random();
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    array[i, j] = random.Next(0, 10);
+                }
+            }
+            return array;
+        }
+        public void Create(bool isRandom, int arrayLength, int arrayWidth)
+        {
+            if (isRandom)
+            {
+                Random random = new Random();
+                int ArrayLength = random.Next(3, 10);
+                int ArrayWidth = random.Next(3, 10);
+                array = new int[ArrayWidth, ArrayLength];
+                GetTwoDimensionalArrayRandom(array);
+            }
+            else
+            {
+                array = new int[arrayWidth, arrayLength];
+                GetTwoDimensionalArray(array);
+            }
+        }
+        public int getAverageTwoDimensionalArrayValue()
+        {
+            int sum = 0;
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    sum += array[i, j];
+                }
+            }
+            return sum / array.Length;
+        }
+        public int[,] getTwoDimensionalArrayAsSanke()
+        {
+            int[,] newArray = new int[array.GetLength(0), array.GetLength(1)];
+
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        newArray[i, j] = array[i, j];
+                    }
+                    else
+                    {
+                        newArray[i, j] = array[i, array.GetLength(1) - j - 1];
+                    }
+                }
+            }
+            array = newArray;
+            return newArray;
+        }
+        public void printTwoDimensionalArray()
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    Console.Write(array[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
