@@ -6,26 +6,50 @@ namespace TwoDmensionalArray
     {
         static void Main(string[] args)
         {
-            twoDmensionalArray array = new twoDmensionalArray(true, 4, 5);
-            Console.WriteLine("Среднее занчение: ");
-            Console.WriteLine(array.getAverageTwoDimensionalArrayValue());
-            array.getTwoDimensionalArrayAsSanke();
-            Console.WriteLine("Вывод змейкой: ");
-            array.printTwoDimensionalArray();
-            Console.WriteLine();
-            array.Create(flase, 3, 3);
-            Console.WriteLine("Среднее занчение: ");
-            Console.WriteLine(array.getAverageTwoDimensionalArrayValue());
-            array.getTwoDimensionalArrayAsSanke();
-            Console.WriteLine("Вывод змейкой: ");
-            array.printTwoDimensionalArray();
-
+            Console.Write("Создать массив не случайно (Да или Нет)? ");
+            twoDimensionalArray array;
+            if (Console.ReadLine() == "Да")
+            {
+                Console.Write("Введите длину массива: ");
+                int length = int.Parse(Console.ReadLine());
+                Console.Write("Введите ширину массива: ");
+                array = new twoDimensionalArray(true, length, int.Parse(Console.ReadLine()));
+            }
+            else
+            {
+                Console.Write("Введите длину массива: ");
+                int length = int.Parse(Console.ReadLine());
+                Console.Write("Введите ширину массива: ");
+                array = new twoDimensionalArray(false, length, int.Parse(Console.ReadLine()));
+            }
+            Console.WriteLine("Что вы хотите вывести? Напишите Среднее значение, или Вывести элементы чётных в обратном, или Вывести массив, или Пересоздать массив: ");
+            while (true)
+            {
+                string question = Console.ReadLine();
+                if (question == "Среднее значение")
+                {
+                    Console.WriteLine("Среднее значение: " + array.getAverageTwoDimensionalArrayValue());
+                }
+                else if (question == "Вывести элементы чётных в обратном")
+                {
+                    array.getTwoDimensionalArrayAsSanke();
+                    array.printTwoDimensionalArray();
+                }
+                else if (question == "Вывести массив")
+                {
+                    array.printTwoDimensionalArray();
+                }
+                else if (question == "Пересоздать массив")
+                {
+                    array.fillArray(false, 1, 2);
+                }
+            }
         }
     }
-    class twoDmensionalArray
+    class twoDimensionalArray
     {
         private int[,] array;
-        public twoDmensionalArray(bool isNotRandom, int arrayLength, int arrayWidth)
+        public twoDimensionalArray(bool isNotRandom, int arrayLength, int arrayWidth)
         {
             if (isNotRandom)
             {
@@ -64,8 +88,26 @@ namespace TwoDmensionalArray
             }
             return array;
         }
-        public void Create(bool isRandom, int arrayLength, int arrayWidth)
+        public void fillArray(bool isNotRandom, int arrayLength, int arrayWidth)
         {
+            Console.Write("Пересоздать массив не случайно (Да или Нет)? ");
+            int[,] array;
+            if (Console.ReadLine() == "Да")
+            {
+                Console.Write("Введите длину массива: ");
+                arrayLength = int.Parse(Console.ReadLine());
+                Console.Write("Введите ширину массива: ");
+                arrayWidth = int.Parse(Console.ReadLine());
+                isNotRandom = true;
+            }
+            else
+            {
+                Console.Write("Введите длину массива: ");
+                arrayLength = int.Parse(Console.ReadLine());
+                Console.Write("Введите ширину массива: ");
+                arrayWidth = int.Parse(Console.ReadLine());
+                isNotRandom = false;
+            }
             if (isNotRandom)
             {
                 array = new int[arrayWidth, arrayLength];
